@@ -1,5 +1,7 @@
+#!/usr/bin/env python
 import argparse
-import logging
+import gitlab
+from pprint import pprint
 
 parser = argparse.ArgumentParser(
     description="Push and pull declarative configuration of GitLab applications and repositories",
@@ -14,6 +16,24 @@ parser.add_argument(
     default="https://gitlab.com",
 )
 
-args = parser.parse_args()
+parser.add_argument(
+    "-t",
+    "--token",
+    help="api token",
+    type=str,
+    required=True,
+)
 
-print(args.server)
+
+def main() -> None:
+    args = parser.parse_args()
+
+    # For now, we'll handle this manually. #7 is the start of the thread to improve this
+    if args.token.startswith("@"):
+        with open(args.token[1:]) as file:
+            args.token = file.read()
+
+    gl = gitlab.Gitlab(args.server, private_token=args.token)
+    gl.auth()
+    project = gl.projects.get(5064907)
+    print("done")
