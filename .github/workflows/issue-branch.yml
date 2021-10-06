@@ -1,4 +1,4 @@
-
+name: Instantiate branch
 on:
   issues:
     types: [ assigned ]
