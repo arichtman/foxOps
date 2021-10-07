@@ -1,39 +1,20 @@
 #!/usr/bin/env python
-import argparse
+from foxops.configuration import configuration
+import typer
 import gitlab
 from pprint import pprint
 
-parser = argparse.ArgumentParser(
-    description="Push and pull declarative configuration of GitLab applications and repositories",
-    add_help=True,
-    allow_abbrev=True,
+import foxops.project
+import foxops.group
+
+app = typer.Typer(
+    name="foxops",
+    help="foxops command line interface for pushing and pulling Gitlab configuration",
+    context_settings={"help_option_names": ["-h", "--help", "-?"]},
 )
-parser.add_argument(
-    "-s",
-    "--server",
-    help="server you want to interact with",
-    type=str,
-    default="https://gitlab.com",
-)
-
-parser.add_argument(
-    "-t",
-    "--token",
-    help="api token",
-    type=str,
-    required=True,
-)
+app.add_typer(foxops.project.app, name="project")
+app.add_typer(foxops.group.app, name="group")
 
 
-def main() -> None:
-    args = parser.parse_args()
-
-    # For now, we'll handle this manually. #7 is the start of the thread to improve this
-    if args.token.startswith("@"):
-        with open(args.token[1:]) as file:
-            args.token = file.read()
-
-    gl = gitlab.Gitlab(args.server, private_token=args.token)
-    gl.auth()
-    project = gl.projects.get(5064907)
-    print("done")
+def main(foo: str = "") -> None:
+    app()
