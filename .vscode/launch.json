@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "module": "foxops",
-            "args": [ "-t", "@env/GITLAB_ACCESS_TOKEN" ],
+            "args": [ "project", "get", "foxops-testing" ],
         }
     ]
 }
