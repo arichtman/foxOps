@@ -6,8 +6,8 @@ The intention of this project is to enable a gitOps approach to the configuratio
 
 The information is laid out into different types of documents:
 
-- Guides
-- Specifications
-- Ledgers
-- Figures
-- Templates
+- Guides: narrative format intended to explain how things work or how to utilise things
+- Specifications: purely facts on the attributes or nature of things
+- Registers: listings
+- Figures: tables, diagrams, charts, all kinds of visual aids
+- Templates: structures to be copied when producing artifacts
