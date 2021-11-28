@@ -20,12 +20,3 @@ def get():
     """
     _id = None
     print(f"getting group {_id}")
-
-
-# @click.group('group')
-# def gitlab_group():
-#     pass
-
-# @gitlab_group.command('get')
-# def get_gitlab_group():
-#     print('getting gitlab group')

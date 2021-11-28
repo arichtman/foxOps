@@ -16,6 +16,9 @@ commitizen = "^2.18.1"
 pre-commit = "^2.15.0"
 pytest = "^6.2.5"
 
+[tool.poetry.scripts]
+foxops = "foxops.__main__:cli"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
