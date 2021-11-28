@@ -8,7 +8,6 @@ license = "GPL3"
 [tool.poetry.dependencies]
 python = "^3.9"
 python-gitlab = "^2.10.1"
-typer = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 mkdocs = "^1.2.2"
@@ -23,5 +22,5 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 90
-target-version = ['py36', 'py37', 'py38']
+target-version = ['py39']
 include = '\.pyi?$'

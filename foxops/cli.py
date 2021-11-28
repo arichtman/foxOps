@@ -1,20 +1,36 @@
 #!/usr/bin/env python
-from foxops.configuration import configuration
-import typer
-import gitlab
-from pprint import pprint
+import click
 
-import foxops.project
-import foxops.group
 
-app = typer.Typer(
-    name="foxops",
-    help="foxops command line interface for pushing and pulling Gitlab configuration",
-    context_settings={"help_option_names": ["-h", "--help", "-?"]},
+@click.group()
+@click.option("--verbose", "-v", "_verbose", type=bool, help="Toggle debug level output")
+@click.option(
+    "--config-file",
+    "-c",
+    "_config_file",
+    type=click.File("rb"),
+    help="Path to YAML/JSON config file",
 )
-app.add_typer(foxops.project.app, name="project")
-app.add_typer(foxops.group.app, name="group")
+def cli(_verbose, _config_file) -> None:
+    """
+    CLI interface for declarative configuration of Gitlab resources
+    """
+    if _verbose:
+        print("****")
 
 
-def main(foo: str = "") -> None:
-    app()
+@cli.group("group")
+def gitlab_group():
+    # do anything common to all groups here
+    pass
+
+
+@cli.group("project")
+def gitlab_project():
+    pass
+
+
+@gitlab_group.command("get")
+@click.option("--id", "-i", "_id", type=int, prompt="Project id number")
+def get_gitlab_group(_id):
+    print(f"getting group {_id}")
