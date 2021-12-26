@@ -2,12 +2,26 @@
 name = "foxops"
 version = "0.1.0"
 description = "GitOps for GitLab. Maintain your repositories and configuration as-code."
-authors = ["Ariel Richtman <10679234+arichtman@users.noreply.github.com>"]
+authors = ["Ariel Richtman <ariel@richtman.com.au>"]
 license = "GPL3"
+homepage = "https://github.com/arichtman/foxOps"
+repository = "https://github.com/arichtman/foxOps"
+documentation = "https://arichtman.github.io/foxOps/"
+packages = [
+    { include = "foxops", from = "src" },
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+]
+
+[tool.poetry.urls]
+Changelog = "https://github.com/arichtman/foxOps/releases"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 python-gitlab = "^2.10.1"
+Django = "^4.0"
+click = "^8.0.3"
 
 [tool.poetry.dev-dependencies]
 mkdocs = "^1.2.2"
@@ -15,6 +29,12 @@ black = "^21.9b0"
 commitizen = "^2.18.1"
 pre-commit = "^2.15.0"
 pytest = "^6.2.5"
+cookiecutter = "^1.7.3"
+mypy = "^0.930"
+safety = "^1.10.3"
+coverage = "^6.2"
+pyupgrade = "^2.29.1"
+nox = "^2021.10.1"
 
 [tool.poetry.scripts]
 foxops = "foxops.__main__:cli"
@@ -24,6 +44,26 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-line-length = 90
-target-version = ['py39']
+line-length = 119
+target-version = ['py310']
 include = '\.pyi?$'
+
+[tool.coverage.paths]
+source = ["src", "*/site-packages"]
+tests = ["tests", "*/tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["foxops", "tests"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 100
+
+[tool.mypy]
+strict = true
+warn_unreachable = true
+pretty = true
+show_column_numbers = true
+show_error_codes = true
+show_error_context = true

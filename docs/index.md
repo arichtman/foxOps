@@ -11,3 +11,19 @@ The information is laid out into different types of documents:
 - Registers: listings
 - Figures: tables, diagrams, charts, all kinds of visual aids
 - Templates: structures to be copied when producing artifacts
+
+The following links are manually maintained until #22 is resolved.
+
+Guides:
+
+- [Road map](/guides/road-map.md)
+- [Users](/guides/users.md)
+
+Registers:
+
+- [Decisions](/registers/decisions.md)
+- [Requirements](/registers/requirements.md)
+
+Templates:
+
+- [Y-statements](/templates/y-statements.md)
