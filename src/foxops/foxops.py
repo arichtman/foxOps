@@ -1,16 +1,20 @@
+# type: ignore
 import logging
 
 import gitlab
 
 
 class FoxOps:
-    def __init__(self, base_url="https://gitlab.com", access_token=None):
+    def __init__(self, base_url="https://gitlab.com", access_token=None) -> None:
         logging.debug("Initialising foxops class")
         self.base_url = base_url
         self.__access_token = access_token
         self.__gitlab_instance = gitlab.Gitlab(self.base_url, self.__access_token)
         self.__gitlab_instance.auth()
 
+    # TODO: work out what the return object is. the _list_ method returns an iterator
+    # But the object itself might be this one
+    # https://python-gitlab.readthedocs.io/en/stable/api/gitlab.v4.html#gitlab.v4.objects.Project
     def __search_projects(self, term: str, mine: bool = False):
         results = self.__gitlab_instance.projects.list(search=term, owned=mine)
         if len(results) > 1:

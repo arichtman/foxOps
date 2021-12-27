@@ -1,4 +1,4 @@
-# from typing_extensions import Required
+# type: ignore
 import logging
 
 import click
@@ -7,9 +7,7 @@ import click
 @click.group("group", help="set of commands to work with groups")
 @click.pass_obj
 def cli(config):
-    """
-    Subcommand for interacting with groups
-    """
+    """Subcommand for interacting with groups"""
     # This function runs for all group subcommands
     logging.debug(config)
 
@@ -27,16 +25,12 @@ group_id_argument = click.option(
 @cli.command("get")
 @group_id_argument
 def get(_id):
-    """
-    Command for retrieving a group
-    """
+    """Command for retrieving a group"""
     logging.info(f"getting group {_id}")
 
 
 @cli.command("delete")
 @group_id_argument
 def delete(_id):
-    """
-    Command for deleting a group
-    """
+    """Command for deleting a group"""
     logging.info(f"deleting group {_id}")

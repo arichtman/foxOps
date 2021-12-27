@@ -1,3 +1,4 @@
+# type: ignore
 import logging
 import os
 
@@ -10,7 +11,10 @@ logger = logging.getLogger(__name__)
 
 
 class CommandLineApp(click.MultiCommand):
+    """The root class that Click uses"""
+
     def list_commands(self, ctx):
+        """Locates all valid subcommand modules"""
         rv = []
         for filename in os.listdir(plugin_folder):
             if filename.endswith(".py") and filename != "__init__.py":
@@ -19,6 +23,7 @@ class CommandLineApp(click.MultiCommand):
         return rv
 
     def get_command(self, ctx, name):
+        """Retrieves all found subcommands"""
         ns = {}
         fn = os.path.join(plugin_folder, name + ".py")
         if not os.path.exists(fn):
@@ -41,7 +46,8 @@ class CommandLineApp(click.MultiCommand):
 # This insists on being placed after the first command, ideally it could be put anywhere
 @click.option("--debug", "-d", is_flag=True, help="Toggles debug level output")
 @click.option("--access-token")
-def cli(ctx, debug: bool, base_url: str, access_token: str):
+# TODO: locate context object type
+def cli(ctx, debug: bool, base_url: str, access_token: str) -> None:
     """Actual root function that handles the cli"""
     if debug:
         logging.basicConfig(level=logging.DEBUG)
