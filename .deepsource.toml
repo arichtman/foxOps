@@ -2,7 +2,8 @@ version = 1
 
 test_patterns = [
   "tests/**",
-  "*_test.py"
+  "*_test.py",
+  "noxfile.py"
 ]
 
 [[analyzers]]

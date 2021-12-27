@@ -1,3 +1,1 @@
-"""
-Required to ensure this directory is packaged
-"""
+"""Required to ensure this directory is packaged"""

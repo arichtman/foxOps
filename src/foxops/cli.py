@@ -30,7 +30,7 @@ class CommandLineApp(click.MultiCommand):
             raise ValueError("Command passed is not supported by this package")
         with open(fn) as f:
             code = compile(f.read(), fn, "exec")
-            eval(code, ns, ns)
+            eval(code, ns, ns)  # skipcq: PYL-W0123
         return ns["cli"]
 
 
@@ -46,7 +46,7 @@ class CommandLineApp(click.MultiCommand):
 # This insists on being placed after the first command, ideally it could be put anywhere
 @click.option("--debug", "-d", is_flag=True, help="Toggles debug level output")
 @click.option("--access-token")
-# TODO: locate context object type
+# NB: locate context object type
 def cli(ctx, debug: bool, base_url: str, access_token: str) -> None:
     """Actual root function that handles the cli"""
     if debug:
