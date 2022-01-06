@@ -19,7 +19,7 @@ Changelog = "https://github.com/arichtman/foxOps/releases"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-python-gitlab = "^2.10.1"
+python-gitlab = "^3.0.0"
 Django = "^4.0"
 click = "^8.0.3"
 
