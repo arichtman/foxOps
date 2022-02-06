@@ -32,7 +32,7 @@ pytest = "^6.2.5"
 cookiecutter = "^1.7.3"
 mypy = "^0.931"
 safety = "^1.10.3"
-coverage = "^6.2"
+coverage = "^6.3"
 pyupgrade = "^2.29.1"
 nox = "^2021.10.1"
 
