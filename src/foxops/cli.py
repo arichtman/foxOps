@@ -29,8 +29,8 @@ class CommandLineApp(click.MultiCommand):
         if not os.path.exists(fn):
             raise ValueError("Command passed is not supported by this package")
         with open(fn) as f:
-            code = compile(f.read(), fn, "exec")
-            eval(code, ns, ns)  # skipcq: PYL-W0123
+            code = compile(f.read(), fn, "exec")  # nosemgrep
+            eval(code, ns, ns)  # nosemgrep
         return ns["cli"]
 
 

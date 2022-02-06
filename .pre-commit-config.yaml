@@ -27,7 +27,7 @@ repos:
     hooks:
       - id: flake8
   - repo: https://github.com/psf/black
-    rev: 21.12b0
+    rev: 22.1.0
     hooks:
       - id: black
   - repo: https://github.com/pre-commit/mirrors-prettier
@@ -39,17 +39,18 @@ repos:
     hooks:
       - id: pyupgrade
   - repo: https://github.com/asottile/reorder_python_imports
-    rev: v2.6.0
+    rev: v2.7.1
     hooks:
       - id: reorder-python-imports
-  - repo: https://github.com/arichtman/jake
-    rev: "ft-pre-commit-hooks"
-    hooks:
-      - id: scan
+  # Need deactivate as something is going horribly wrong inside Jake :'(
+  # args: "-w" doesn't work either since it's Jake itself crashing and returning nonzero
+  # - repo: https://github.com/sonatype-nexus-community/jake
+  #   rev: "v1.4.3"
+  #   hooks:
+  #     - id: scan
   - repo: https://github.com/returntocorp/semgrep
-    rev: "v0.77.0"
+    rev: "v0.80.0"
     hooks:
       - id: semgrep
-        # See semgrep.dev/rulesets to select a ruleset and copy its URL
         args:
           ["--config", "auto", "--error", "--skip-unknown-extensions", "src"]
