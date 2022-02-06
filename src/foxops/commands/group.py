@@ -12,13 +12,9 @@ def cli(config):
     logging.debug(config)
 
 
-group_id_argument = click.option(
-    "--id",
-    "-i",
-    "_id",
-    required=True,
+group_id_argument = click.argument(
+    "id",
     type=int,
-    help="Integer identifier, the primary key of the group",
 )
 
 
