@@ -18,3 +18,7 @@ Notes:
 - configargparse - supports a lot of what we want, just still imperative argument declaration. Look into this one eventually
 - click - really nice and mature, plenty popular, company support even! might use this one
 - typer - built ontop of click so all those benefits + some additional features, not super mature though popular and supports subcommands while using annotations and typing.
+
+## 02. Configuration management and storage
+
+In the context of features around storing, using, and modifying configuration, facing the option to implement we decided not to implement to achieve focus on core functionality, accepting that only a handful of values would go into the configuration and it wouldn't save much over supporting `.env` files. See #14 for some more thoughts
