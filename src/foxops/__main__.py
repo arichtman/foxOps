@@ -1,5 +1,3 @@
-# type: ignore
-# I am getting really sick of mypy's sh*t
 from foxops.cli import cli
 
 
