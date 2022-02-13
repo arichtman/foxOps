@@ -10,6 +10,9 @@ plugin_folder = os.path.join(os.path.dirname(__file__), "commands")
 logger = logging.getLogger(__name__)
 load_dotenv()
 
+env_access_token = os.getenv("FXO_ACCESS_TOKEN")
+env_base_url = os.getenv("FXO_BASE_URL")
+
 
 class CommandLineApp(click.MultiCommand):
     """The root class that Click uses"""
@@ -42,31 +45,34 @@ class CommandLineApp(click.MultiCommand):
 @click.option(
     "--base-url",
     "-u",
-    default="https://gitlab.com",
+    default="https://gitlab.com" if not env_base_url else env_base_url,
     type=str,
     help="Base URL of the Gitlab server",
 )
 # This insists on being placed after the first command, ideally it could be put anywhere
 @click.option("--debug", "-d", is_flag=True, help="Toggles debug level output")
-@click.option(
-    "--access-token", "-t", required=(not os.getenv("GITLAB_ACCESS_TOKEN")), help="GitLab personal access token"
-)
+@click.option("--access-token", "-t", required=(not env_access_token), help="GitLab personal access token")
 # NB: locate context object type
 def cli(ctx, debug: bool, base_url: str, access_token: str) -> None:
     """Actual root function that handles the cli"""
+
+    if access_token is None:
+        access_token = env_access_token
+
     if debug:
         logging.basicConfig(level=logging.DEBUG)
+        logger.debug(debug)
+        logger.debug(base_url)
+        logger.debug(access_token)
+        from pprint import pprint
+
+        # pprint(os.environ) still ugly
+        env = {key: val for key, val in os.environ.items() if key.startswith("FXO")}
+        pprint(env)
+
     else:
         logging.basicConfig(level=logging.INFO)
 
-    if access_token is None:
-        access_token = os.getenv("GITLAB_ACCESS_TOKEN")
-    logger.debug(debug)
-    logger.debug(base_url)
-    logger.debug(access_token)
-    # Something's not right here, we shouldn't be
     Config(base_url=base_url, access_token=access_token)
-    # The foxops object could be adjusted to take the config object but something about that coupling feels bad
-    # I could try some abstract class/interface but that seems overkill for this? Maybe if other parts start
-    # using the config object...
+
     ctx.obj = FoxOps(base_url=base_url, access_token=access_token)

@@ -2,12 +2,14 @@ import logging
 
 import gitlab
 
+logger = logging.getLogger(__name__)
+
 
 class FoxOps:
     """Wrapper class around the gitlab object to allow higher-order interations"""
 
     def __init__(self, base_url="https://gitlab.com", access_token=None) -> None:
-        logging.debug("Initialising foxops class")
+        logger.debug("Initialising foxops class")
         self.base_url = base_url
         self.__access_token = access_token
         self.__gitlab_instance = gitlab.Gitlab(self.base_url, self.__access_token)
@@ -34,7 +36,7 @@ class FoxOps:
 
     def get_project(self, identifier):
         """Retreives a project by ambiguous identifier"""
-        logging.debug(f"foxops getting project {identifier}")
+        logger.debug(f"foxops getting project {identifier}")
         if identifier.isnumeric():
             project_id = identifier
         else:

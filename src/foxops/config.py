@@ -4,12 +4,15 @@ import requests
 from django.core.validators import URLValidator
 
 
+logger = logging.getLogger(__name__)
+
+
 # NB: This is likely to cause global coupling - rethink
 class Config:
     """Structure intended to hold any globally used configuration items"""
 
     def __init__(self, access_token: str, base_url: str):
-        logging.debug("initializing configuration class")
+        logger.debug("initializing configuration class")
         self.base_url = base_url
         self.access_token = access_token.strip()
         self.__validate_config()
