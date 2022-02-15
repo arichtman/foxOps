@@ -1,5 +1,7 @@
 # foxOps
 
+## **_ This project is deprecated in favor of the Gitlabhq Terraform provider. _**
+
 GitOps for GitLab. Maintain your repositories and configuration as-code.
 
 Some resources
